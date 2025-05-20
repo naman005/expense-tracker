@@ -4,6 +4,7 @@
 
 # Ignore environment files
 /backend/.env
+/frontend/.env
 
 # Ignore uploaded images or other data
 /backend/uploads/
