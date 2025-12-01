@@ -2,7 +2,7 @@
 
 import axiosInstance from "./axiosInstance";
 import uploadImage from "./uploadImage";
-import { API_PATHS } from "./apiPaths";
+import { API_PATHS } from "../utlis/apiPaths";
 
 /**
  * Upload image and register user

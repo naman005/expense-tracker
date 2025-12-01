@@ -3,6 +3,8 @@ import TransactionInfoCard from "../Cards/TransactionInfoCard";
 import moment from "moment";
 
 export default function ExpenseTransactions ({ transactions, onSeeMore }) {
+    const isEmpty = !transactions || transactions.length === 0;
+
     return (
         <div className="card">
             <div className="flex items-center justify-between">
@@ -11,19 +13,25 @@ export default function ExpenseTransactions ({ transactions, onSeeMore }) {
                     See All <LuArrowRight className="text-base" />
                 </button>
             </div>
+            {isEmpty ? (
+                <div className="py-6 text-center text-gray-500">
+                    No recent Expenses
+                </div>
+            ) : (
             <div className="mt-6">
                 {transactions?.slice(0,5)?.map((expense) => (
                 <TransactionInfoCard
                     key={expense._id}
                     title={expense.category}
                     icon={expense.icon}
-                    date={moment(expense.date).format("DD MM YYYY")}
+                    date={moment(expense.date).format("DD/MM/YYYY")}
                     amount={expense.amount}
                     type="expense"
                     hideDeleteBtn
                 />
                 ))}
             </div>
+            )}
         </div>
     )
 }

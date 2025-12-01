@@ -9,7 +9,7 @@ const generateToken = (id) => {
 
 // Register User
 exports.registerUser = async (req, res) => {
-    const { fullName, username, password, profileUrl } = req.body;
+    const { fullName, username, password } = req.body;
 
     // Validation: Check for missing fields
     if (!fullName || !username || !password) {
@@ -29,7 +29,6 @@ exports.registerUser = async (req, res) => {
             fullName,
             username,
             password,  
-            profileUrl: profileUrl || null,
         });
 
         await user.save();
@@ -43,7 +42,6 @@ exports.registerUser = async (req, res) => {
                 id: user._id,
                 fullName: user.fullName,
                 username: user.username,
-                profileUrl: user.profileUrl,
             },
             token,
         });

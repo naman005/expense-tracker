@@ -76,7 +76,7 @@ export default function Home() {
 
             <div className="grid gri-cols-1 md:grid-cols-2 gap-6 mt-6">
                 <RecentTransactions
-                    transactions={dashboardData?.recentTransactions}
+                    transactions={dashboardData?.recentTransactions || []}
                     onSeeMore={() => navigate("/expense")}
                 />
 

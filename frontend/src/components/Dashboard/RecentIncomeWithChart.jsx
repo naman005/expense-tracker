@@ -22,9 +22,17 @@ export default function RecentIncomeWithChart ({ data, totalIncome }) {
 
         return () => {};
     }, [data]);
+
+    const isEmpty = !data || data.length === 0;
     
     return (
         <div className="card">
+            {isEmpty ? (
+                <div className="py-6 text-center text-gray-500">
+                    No income in the last 60 days
+                </div>
+            ) : (
+                <>
             <div className="flex items-center justify-center">
                 <h5 className="text-lg">Last 60 Days Income</h5>
             </div>
@@ -35,6 +43,8 @@ export default function RecentIncomeWithChart ({ data, totalIncome }) {
                 showTextAnchor
                 colors={COLORS}
             />
+            </>
+            )}
         </div>
     )
 }

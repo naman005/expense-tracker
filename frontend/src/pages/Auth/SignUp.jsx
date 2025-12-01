@@ -3,15 +3,12 @@ import { Link, useNavigate } from "react-router-dom"
 import AuthLayout from "../../components/layouts/AuthLayout"
 import Input from "../../components/Inputs/Input";
 import { validateUsername } from "../../utlis/helper";
-import ProfilePhotoSelector from "../../components/Inputs/ProfilePhotoSelector";
 import { UserContext } from "../../context/UserContext";
 import axiosInstance from "../../utlis/axiosInstance";
 import { API_PATHS } from "../../utlis/apiPaths";
-import  uploadImage  from '../../utlis/uploadImage'
 
 
 export default function SignUp() {
-    const [profilePic, setProfilePic] = useState(null);
     const [fullName, setFullName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -25,7 +22,6 @@ export default function SignUp() {
     const handleSignUp = async (e) => {
         e.preventDefault();
 
-        let profileImageUrl = "";
 
         if(!fullName) {
             setError("Please enter your name");
@@ -47,17 +43,10 @@ export default function SignUp() {
         // Sign Up API Call
         try {
 
-            // Upload image if present
-            if (profilePic) {
-                const imgUploadRes = await uploadImage(profilePic);
-                profileImageUrl = imgUploadRes.profileUrl || "";
-            }
-
             const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
                 fullName,
                 username,
                 password,
-                profileUrl: profileImageUrl, 
             });
 
             const { token, user } = response.data;
@@ -85,7 +74,6 @@ export default function SignUp() {
                 </p>
 
                 <form onSubmit={handleSignUp}>
-                    <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
                     <div className="col-span-2 ">
                         <Input 
                             value={fullName}

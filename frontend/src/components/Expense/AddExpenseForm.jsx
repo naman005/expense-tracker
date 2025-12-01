@@ -30,7 +30,7 @@ export default function AddExpenseForm ({ onAddExpense }) {
                 onChange={({ target }) => handleChange("amount", target.value)}
                 label="Amount"
                 placeholder=""
-                type="number"
+                type="text"
             />
             <Input 
                 value={expense.date}
